@@ -1,11 +1,12 @@
+require("dotenv").config();
 const express = require("express");
 const model = require("./models/blog.model.js");
 const mongoose = require("mongoose");
 const os = require("os");
 const { blogRouter } = require("./routes/blog.route");
 const config =require('./config/config.js');
-const {errorHandler}=require('./middlewares/errors.js');
-require("dotenv").config();
+const {errorHandler,errorConverter}=require('./middlewares/errors.js');
+
 process.env.UV_THREADPOOL_SIZE = os.cpus().length;
 mongoose
   .connect(config.dbConnection)
