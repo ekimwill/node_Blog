@@ -6,7 +6,7 @@ const getBlogs =catchAsync( async (req, res) => {
       res.send(blogs);
     })
 const createBlog = catchAsync(async (req, res) => {
-  await Blog.createe(req.body);
+  await Blog.create(req.body);
   res.send({ success: true, message: "Blog created successfully" });
 });
 

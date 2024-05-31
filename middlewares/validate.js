@@ -1,6 +1,9 @@
 const joi = require("joi");
 const { message } = require("../validations/env.validation");
 const ApiError = require("../utils/ApiError");
+
+
+
 const validate = (schema) => (req, res, next) => {
   const keys = Object.keys(schema);
   const object = keys.reduce((obj, key) => {
@@ -13,9 +16,11 @@ const validate = (schema) => (req, res, next) => {
   const { value, error } = joi.compile(schema).validate(object);
 
   if (error) {
-    const errors = error.details.map((detail) => {
-      return detail.message;
-    }).join(", ");
+    const errors = error.details
+      .map((detail) => {
+        return detail.message;
+      })
+      .join(", ");
     next(new ApiError(400, errors));
   }
   return next();
