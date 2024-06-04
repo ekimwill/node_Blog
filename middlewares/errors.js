@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const config = require("../config/config.js");
 const ApiError = require("../utils/ApiError.js");
 const httpStatus = require("http-status");
-
+const logger = require("../config/logger.js");
 const errorConverter = (err, req, res, next) => {
     let error = err;
     if (!(error instanceof ApiError)) {
@@ -30,7 +30,7 @@ const errorHandler = (err, req, res, next) => {
   };
   res.locals.errorMessage = message;
   if (config.env === "development") {
-    console.log(err);
+    logger.error(err);
   }
   res.status(statusCode).send(response);
 };
